@@ -1,7 +1,7 @@
-(ns basenote.core
-    (:require 
-              [reagent.core :as reagent :refer [atom]]
-              [reagent.dom :as rd]))
+(ns cljs.basenote.core
+  (:require
+   [reagent.core :as reagent :refer [atom]]
+   [reagent.dom :as rd]))
 
 (enable-console-print!)
 
@@ -24,4 +24,4 @@
   ;; optionally touch your app-state to force rerendering depending on
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+  )

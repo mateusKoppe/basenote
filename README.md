@@ -33,6 +33,12 @@ To create a production build run:
 And open your browser in `resources/public/index.html`. You will not
 get live reloading, nor a REPL. 
 
+## Server Running
+
+To start a web server for the application, run:
+
+    lein ring server
+
 ## License
 
 Copyright © 2014 FIXME

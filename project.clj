@@ -9,10 +9,13 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.773"]
                  [org.clojure/core.async  "0.4.500"]
-                 [reagent "0.10.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]]
+                 [reagent "0.10.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
+                 [compojure "1.6.2"]
+                 [ring/ring-defaults "0.3.2"]]
 
   :plugins [[lein-figwheel "0.5.20"]
-            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+            [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
+            [lein-ring "0.12.5"]]
 
   :source-paths ["src"]
 
@@ -23,14 +26,14 @@
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
                 ;; into your build
-                :figwheel {:on-jsload "basenote.core/on-js-reload"
+                :figwheel {:on-jsload "cljs.basenote.core/on-js-reload"
                            ;; :open-urls will pop open your application
                            ;; in the default browser once Figwheel has
                            ;; started and compiled your application.
                            ;; Comment this out once it no longer serves you.
                            :open-urls ["http://localhost:3449/index.html"]}
 
-                :compiler {:main basenote.core
+                :compiler {:main cljs.basenote.core
                            :target :bundle
                            :asset-path "js/compiled/out"
                            :output-to "resources/public/js/compiled/out/index.js"
@@ -47,7 +50,7 @@
                {:id "min"
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/basenote.js"
-                           :main basenote.core
+                           :main cljs.basenote.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 
@@ -58,7 +61,7 @@
              :css-dirs ["resources/public/css"] ;; watch and update CSS
 
              ;; Start an nREPL server into the running figwheel process
-             ;; :nrepl-port 7888
+             :nrepl-port 7888
 
              ;; Server Ring Handler (optional)
              ;; if you want to embed a ring handler into the figwheel http-kit
@@ -89,6 +92,8 @@
              ;; to pipe all the output to the repl
              ;; :server-logfile false
              }
+  
+  :ring {:handler clj.basenote.handler/app}
 
   :profiles {:dev {:dependencies [[binaryage/devtools "1.0.0"]
                                   [figwheel-sidecar "0.5.20"]]
