@@ -10,5 +10,7 @@ pom.xml
 .lein-repl-history
 .lein-plugins/
 .repl
+.calva
+.lsp
 .nrepl-port
 node_modules

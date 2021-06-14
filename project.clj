@@ -11,7 +11,8 @@
                  [org.clojure/core.async  "0.4.500"]
                  [reagent "0.10.0" :exclusions [cljsjs/react cljsjs/react-dom cljsjs/react-dom-server]]
                  [compojure "1.6.2"]
-                 [ring/ring-defaults "0.3.2"]]
+                 [ring/ring-defaults "0.3.2"]
+                 [ring/ring-json "0.5.1"]]
 
   :plugins [[lein-figwheel "0.5.20"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
