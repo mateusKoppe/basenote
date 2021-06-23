@@ -1,10 +1,10 @@
-# basenote
+# Basenote
 
-FIXME: Write a one-line description of your library/project.
+BaseNote allows the creation and editing of customizable pages, where the user can take notes, add lists, maintain todo-lists and custom databases that can be viewed in multiple ways. Furthermore, it is a self hosted solution where the user stores his own data, thus ensuring privacy and control over them.
 
-## Overview
+## Why should I use?
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+BaseNote is a self-hosted application, that is, all information produced by you will be stored locally, you will have total security and control over your data, besides the guarantee that they will only be stored and not exploited in any way. Another plus point of ours is that you won't have to worry about having your access limited after a trial period, it's completely free.
 
 ## Setup
 
