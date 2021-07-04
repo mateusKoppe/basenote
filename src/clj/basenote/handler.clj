@@ -3,7 +3,7 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-            [clj.basenote.pages :as pages]))
+            [clj.basenote.routes.pages :as pages]))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")

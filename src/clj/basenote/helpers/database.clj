@@ -1,4 +1,4 @@
-(ns clj.basenote.database
+(ns clj.basenote.helpers.database
   (:require [codax.core :as codax]))
 
 (defn get-session [fn]
