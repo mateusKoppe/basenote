@@ -8,6 +8,7 @@
 (defroutes app-routes
   (GET "/" [] "Hello World")
   (GET "/pages" [] pages/route-list)
+  (GET "/pages/:id" [] pages/route-show)
   (POST "/pages" [] pages/route-create)
   (PUT "/pages/:id" [] pages/route-update)
   (DELETE "/pages/:id" [] pages/route-delete)

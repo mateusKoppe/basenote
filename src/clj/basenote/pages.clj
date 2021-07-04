@@ -15,6 +15,9 @@
 (defn get-pages []
   (get-session #(codax/get-at! % [:pages])))
 
+(defn get-page [id]
+  (get-session #(codax/get-at! % [:pages id])))
+
 (defn update-page [page]
   (get-session
    (fn [db]
@@ -31,6 +34,10 @@
 
 (defn route-list [req]
   (response (get-pages)))
+
+(defn route-show [req]
+  (let [id (-> req :route-params :id)]
+    (response (get-page id))))
 
 (defn route-create [req]
   (let [body (:body req)
