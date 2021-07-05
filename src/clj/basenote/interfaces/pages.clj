@@ -7,12 +7,14 @@
    (fn [db]
      (codax/assoc-at! db
                       [:pages (:id page)]
-                      {:id (:id page)
-                       :title (:title page)})
+                      (select-keys page [:id :title]))
      (codax/get-at! db [:pages (:id page)]))))
 
 (defn get-pages []
   (get-session #(codax/get-at! % [:pages])))
+
+(defn page-exists? [id]
+  (get-session #(some? (codax/get-at! % [:pages id :id]))))
 
 (defn get-page [id]
   (get-session #(codax/get-at! % [:pages id])))
@@ -22,8 +24,7 @@
    (fn [db]
      (codax/update-at! db
                        [:pages (:id page)]
-                       (fn [_] {:id (:id page)
-                                :title (:title page)}))
+                       (fn [_] (select-keys page [:id :title])))
      (codax/get-at! db [:pages (:id page)]))))
 
 (defn remove-page [id]
