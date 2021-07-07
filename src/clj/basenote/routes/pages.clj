@@ -1,7 +1,8 @@
 (ns clj.basenote.routes.pages
   (:require [ring.util.response :refer [response status]]
-            [clj.basenote.interfaces.pages :as pages]
-            [struct.core :as st]))
+            [struct.core :as st]
+            [clj.basenote.helpers.response :refer [validate-body]]
+            [clj.basenote.interfaces.pages :as pages]))
 
 (def validation-schema {:title [st/required st/string]})
 
@@ -26,39 +27,33 @@
 
 (defn route-create [req]
   (try
-    (let [exists (pages/page-exists? (-> req :body :id))
-          validation (st/validate (:body req) validation-schema)
-          errors (first validation)
-          fields (last validation)]
-      (if exists
-        (-> (response {:msg "id already used"})
-            (status 409))
-        (if errors
-          (-> (response errors)
-              (status 417))
-          (response (pages/create-page fields)))))
+    (validate-body
+     (:body req) validation-schema
+     (fn [fields]
+       (let [exists (pages/page-exists? (-> req :body :id))]
+         (if exists
+           (-> (response {:msg "id already used"})
+               (status 409))
+           (response (pages/create-page fields))))))
     (catch Exception _
       (-> (response {:error "Error in the request"})
           (status 500)))))
 
 (defn route-update [req]
   (try
-    (let [id (-> req :route-params :id)
-          exists (pages/page-exists? id)
-          validation (st/validate (:body req) validation-schema)
-          errors (first validation)
-          fields (last validation)]
-      (if (not exists)
-        (-> (response nil)
-            (status 404))
-        (if errors
-          (-> (response errors)
-              (status 417))
-          (response
-           (pages/update-page (merge fields {:id id}))))))
-    (catch Exception _
-      (-> (response {:error "Error in the request"})
-          (status 500)))))
+    (validate-body
+     (:body req) validation-schema
+     (fn [fields]
+       (let [id (-> req :route-params :id)
+             exists (pages/page-exists? id)]
+         (if (not exists)
+           (-> (response nil)
+               (status 404))
+           (response
+            (pages/update-page (merge fields {:id id})))))))
+  (catch Exception _
+    (-> (response {:error "Error in the request"})
+        (status 500)))))
 
 (defn route-delete [req]
   (try
