@@ -3,11 +3,7 @@
             [clj.basenote.interfaces.pages :as pages]
             [struct.core :as st]))
 
-(defn page-schema [action]
-  (let [base {:id [st/required st/string]
-              :title [st/required st/string]}
-        actions-rules {:update {:id [st/string]}}]
-    (merge base (action actions-rules))))
+(def validation-schema {:title [st/required st/string]})
 
 (defn route-list [req]
   (try
@@ -31,7 +27,7 @@
 (defn route-create [req]
   (try
     (let [exists (pages/page-exists? (-> req :body :id))
-          validation (st/validate (:body req) (page-schema :create))
+          validation (st/validate (:body req) validation-schema)
           errors (first validation)
           fields (last validation)]
       (if exists
@@ -49,7 +45,7 @@
   (try
     (let [id (-> req :route-params :id)
           exists (pages/page-exists? id)
-          validation (st/validate (:body req) (page-schema :update))
+          validation (st/validate (:body req) validation-schema)
           errors (first validation)
           fields (last validation)]
       (if (not exists)
