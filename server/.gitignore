@@ -14,3 +14,4 @@ pom.xml
 .lsp
 .nrepl-port
 node_modules
+data
