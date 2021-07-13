@@ -13,5 +13,4 @@ pom.xml
 .calva
 .lsp
 .nrepl-port
-node_modules
 data
