@@ -12,7 +12,8 @@
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-json "0.5.1"]
                  [codax "1.3.1"]
-                 [funcool/struct "1.3.0"]]
+                 [funcool/struct "1.3.0"]
+                 [ring-cors "0.1.13"]]
 
   :plugins [[lein-ring "0.12.5"]]
 
