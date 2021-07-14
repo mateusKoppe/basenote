@@ -3,7 +3,8 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-            [clj.basenote.routes.pages :as pages]))
+            [clj.basenote.routes.pages :as pages]
+            [ring.middleware.cors :refer [wrap-cors]]))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
@@ -17,4 +18,6 @@
 (def app
   (-> (wrap-defaults app-routes api-defaults)
       wrap-json-response
-      (wrap-json-body {:keywords? true :bigdecimals? true})))
+      (wrap-json-body {:keywords? true :bigdecimals? true})
+      (wrap-cors :access-control-allow-origin [#".*"]
+                 :access-control-allow-methods [:get :put :post :delete])))
