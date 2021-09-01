@@ -19,4 +19,5 @@
 
   :source-paths ["src"]
 
-  :ring {:handler clj.basenote.handler/app})
+  :ring {:handler clj.basenote.handler/app
+         :port     4200})
