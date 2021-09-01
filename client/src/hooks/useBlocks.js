@@ -8,7 +8,6 @@ const useBlocks = (pageId) => {
   const loadBlocks = async () => {
     const response = await Api.get(`/pages/${pageId}/blocks`);
     const data = response.data;
-    console.log(Object.values(data));
     setBlocks(Object.values(data));
   };
 
@@ -31,6 +30,11 @@ const useBlocks = (pageId) => {
     return response.data;
   };
 
+  const deleteBlock = async (id) => {
+    await Api.delete(`/pages/${pageId}/blocks/${id}`);
+    setBlocks((blocks) => blocks.filter((block) => block.id !== id));
+  };
+
   useEffect(() => {
     loadBlocks();
   }, [pageId]);
@@ -39,6 +43,7 @@ const useBlocks = (pageId) => {
     blocks,
     addBlock,
     updateBlock,
+    deleteBlock,
   };
 };
 

@@ -1,12 +1,12 @@
+import { Form } from "react-bootstrap";
+
 const defaultValues = { text: "" };
 
 const TextComponent = ({ value = defaultValues, onChange = () => {} }) => (
-  <input
+  <Form.Control
+    as="textarea"
     value={value.text}
-    onChange={(e) => {
-      console.log(e.target.value);
-      onChange({ ...value, text: e.target.value });
-    }}
+    onChange={(e) => onChange({ ...value, text: e.target.value })}
   />
 );
 

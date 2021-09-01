@@ -1,18 +1,18 @@
 import useBlocks from "../hooks/useBlocks";
 import { useParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 import { blockTypes } from "../components/blocks";
 import AddBlock from "../components/blocks/AddBlock";
+import { Button } from "react-bootstrap";
 
 const Blocks = () => {
   const { pageId } = useParams();
 
-  const { blocks, addBlock, updateBlock } = useBlocks(pageId);
+  const { blocks, addBlock, updateBlock, deleteBlock } = useBlocks(pageId);
 
   return (
     <div>
-      BLocks
+      <h2>Page</h2>
       {blocks.map((block) => {
         const Block = blockTypes[block.type].render;
         return (
@@ -23,6 +23,9 @@ const Blocks = () => {
                 updateBlock(block.id, data);
               }}
             />
+            <Button size="sm" variant="danger" onClick={() => deleteBlock(block.id)}>
+              Delete
+            </Button>
           </div>
         );
       })}
