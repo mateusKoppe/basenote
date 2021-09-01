@@ -1,9 +1,12 @@
 import useBlocks from "../hooks/useBlocks";
+import { useParams } from "react-router-dom";
 
 import { blockTypes } from "../components/blocks";
 
 const Blocks = () => {
-  const { blocks } = useBlocks();
+  const { pageId } = useParams();
+
+  const { blocks, updateBlock } = useBlocks(pageId);
 
   return (
     <div>
@@ -12,7 +15,12 @@ const Blocks = () => {
         const Block = blockTypes[block.type].render;
         return (
           <div key={block.id}>
-            <Block data={block.data} />
+            <Block
+              value={block.data}
+              onChange={(data) => {
+                updateBlock(block.id, data);
+              }}
+            />
           </div>
         );
       })}
