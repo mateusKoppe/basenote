@@ -1,12 +1,14 @@
 import useBlocks from "../hooks/useBlocks";
 import { useParams } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 import { blockTypes } from "../components/blocks";
+import AddBlock from "../components/blocks/AddBlock";
 
 const Blocks = () => {
   const { pageId } = useParams();
 
-  const { blocks, updateBlock } = useBlocks(pageId);
+  const { blocks, addBlock, updateBlock } = useBlocks(pageId);
 
   return (
     <div>
@@ -24,6 +26,7 @@ const Blocks = () => {
           </div>
         );
       })}
+      <AddBlock onSave={addBlock} />
     </div>
   );
 };

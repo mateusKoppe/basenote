@@ -12,9 +12,11 @@ const useBlocks = (pageId) => {
     setBlocks(Object.values(data));
   };
 
-  useEffect(() => {
-    loadBlocks();
-  }, [pageId]);
+  const addBlock = async (block) => {
+    const response = await Api.post(`/pages/${pageId}/blocks`, block);
+    const newBlock = response.data;
+    setBlocks((blocks) => [...blocks, newBlock]);
+  };
 
   const updateBlock = async (id, data) => {
     const index = blocks.findIndex((block) => block.id === id);
@@ -29,8 +31,13 @@ const useBlocks = (pageId) => {
     return response.data;
   };
 
+  useEffect(() => {
+    loadBlocks();
+  }, [pageId]);
+
   return {
     blocks,
+    addBlock,
     updateBlock,
   };
 };
