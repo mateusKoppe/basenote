@@ -12,17 +12,17 @@ const Pages = () => {
     <div>
       <h2>Pages</h2>
         {pages.map((page) => {
-        return (
-          <div key={page.id}>
-          <ListGroup variant="flush">
-              <ListGroup.Item action href={`/pages/${page.id}`} key={page.id}>
-                {page.title}
-              </ListGroup.Item>
-          </ListGroup>             
-            <Button size="sm" variant="danger" onClick={() => deletePage(page.id)}>
-              Delete
-            </Button>
-          </div>
+          return (
+            <div key={page.id}>
+              <ListGroup variant="flush">
+                <ListGroup.Item action href={`/pages/${page.id}`} key={page.id}>
+                  {page.title}
+                </ListGroup.Item>
+              </ListGroup>             
+              <Button size="sm" variant="danger" onClick={() => deletePage(page.id)}>
+                Delete
+              </Button>
+            </div>
         )})}
       <AddPages onSave={addPage} />
     </div>
