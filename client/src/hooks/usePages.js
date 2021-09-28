@@ -21,7 +21,6 @@ const usePages = (pageId) => {
     const index = pages.findIndex((page) => page.id === id);
     const newPage = { ...pages[index], ...data };
 
-
     setPages((pages) => {
       pages[index] = newPage;
       return [...pages];
