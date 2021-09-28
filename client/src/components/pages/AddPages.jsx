@@ -19,7 +19,7 @@ const AddPages = ({ onSave = () => { } }) => {
   return isCreating ? (
     <Form>
        <InputGroup className="mb-3">
-        <InputGroup.Text>Titulo</InputGroup.Text>
+        <InputGroup.Text>Title</InputGroup.Text>
         <FormControl
           onChange={handleChange}
           aria-label="Title"
