@@ -12,6 +12,7 @@ const useBlocks = (pageId) => {
   };
 
   const addBlock = async (block) => {
+    console.log(typeof block);
     const response = await Api.post(`/pages/${pageId}/blocks`, block);
     const newBlock = response.data;
     setBlocks((blocks) => [...blocks, newBlock]);

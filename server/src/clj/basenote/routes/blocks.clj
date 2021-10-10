@@ -33,6 +33,7 @@
     (validate-body
      (:body req) validation-schema
      (fn [fields]
+       (println fields)
        (let [exists (blocks/block-exists?
                      (-> req :body :page-id)
                      (-> req :body :id))]

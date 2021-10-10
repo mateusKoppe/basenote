@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [defroutes GET POST PUT DELETE]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.multipart-params :refer [wrap-multipart-params]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [clj.basenote.routes.pages :as pages]
             [clj.basenote.routes.blocks :as blocks]
@@ -24,6 +25,7 @@
 (def app
   (-> (wrap-defaults app-routes api-defaults)
       wrap-json-response
+      wrap-multipart-params
       (wrap-json-body {:keywords? true :bigdecimals? true})
       (wrap-cors :access-control-allow-origin [#".*"]
                  :access-control-allow-methods [:get :put :post :delete])))

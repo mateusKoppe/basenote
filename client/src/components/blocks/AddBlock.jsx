@@ -25,7 +25,7 @@ const AddBlock = ({ onSave = () => {} }) => {
     setSelectedType(defaultBlock);
   };
 
-  return isCreating ? (
+  const normalType = (
     <Form>
       <Form.Select value={selectedType} onChange={handleSelectChange}>
         {blockKeys.map((key) => (
@@ -37,6 +37,10 @@ const AddBlock = ({ onSave = () => {} }) => {
       <CreatingBlock value={blockState} onChange={setBlockState} isEditing={true} />
       <Button onClick={handleSave}>Save</Button>
     </Form>
+  );
+
+  return isCreating ? (
+    normalType
   ) : (
     <Button onClick={() => setIsCreating(true)}>Add</Button>
   );
