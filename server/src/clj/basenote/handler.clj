@@ -6,6 +6,7 @@
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [clj.basenote.routes.pages :as pages]
             [clj.basenote.routes.blocks :as blocks]
+            [clj.basenote.routes.upload :as upload]
             [ring.middleware.cors :refer [wrap-cors]]))
 
 (defroutes app-routes
@@ -18,6 +19,7 @@
   (GET "/pages/:page-id/blocks" [] blocks/route-list)
   (GET "/pages/:page-id/blocks/:id" [] blocks/route-show)
   (POST "/pages/:page-id/blocks" [] blocks/route-create)
+  (POST "/pages/:page-id/upload" [] upload/route-save)
   (PUT "/pages/:page-id/blocks/:id" [] blocks/route-update)
   (DELETE "/pages/:page-id/blocks/:id" [] blocks/route-delete)
   (route/not-found "Not Found"))
