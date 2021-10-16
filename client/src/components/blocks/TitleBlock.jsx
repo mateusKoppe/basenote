@@ -5,7 +5,7 @@ const DEFAULT_SIZE = 1;
 
 const defaultValues = { text: "", size: DEFAULT_SIZE };
 
-const TitleComponent = ({ value = defaultValues, onChange = () => {} }) => (
+const TitleBlockForm = ({ value, onChange }) => (
   <Form>
     <InputGroup>
       <Form.Select
@@ -27,4 +27,26 @@ const TitleComponent = ({ value = defaultValues, onChange = () => {} }) => (
   </Form>
 );
 
-export default TitleComponent;
+const TitleBlockDisplay = ({ value, onEdit = () => {} }) => {
+  const sizeTitleComponents = {
+    1: ({ children, ...props }) => <h1 {...props}>{children}</h1>,
+    2: ({ children, ...props }) => <h2 {...props}>{children}</h2>,
+    3: ({ children, ...props }) => <h3 {...props}>{children}</h3>,
+  };
+  const SizeTitle = sizeTitleComponents[value.size];
+  return <SizeTitle onClick={onEdit}>{value.text}</SizeTitle>;
+};
+
+const TitleBlock = ({
+  value = defaultValues,
+  isEditing = false,
+  onChange = () => {},
+  onEdit = () => {},
+}) =>
+  isEditing ? (
+    <TitleBlockForm {...{ value, onChange }} />
+  ) : (
+    <TitleBlockDisplay {...{ value, onEdit }} />
+  );
+
+export default TitleBlock;

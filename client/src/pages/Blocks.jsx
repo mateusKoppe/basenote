@@ -1,16 +1,18 @@
-import useBlocks from "../hooks/useBlocks";
 import { useState } from "react";
+import useBlocks from "../hooks/useBlocks";
 import { useParams } from "react-router-dom";
-
 import { blockTypes } from "../components/blocks";
 import AddBlock from "../components/blocks/AddBlock";
-import { Button, Form, InputGroup, FormControl } from "react-bootstrap";
+import { Button, ButtonGroup, Form, InputGroup, FormControl } from "react-bootstrap";
 import usePages from "../hooks/usePages";
 
 const Blocks = () => {
   const { pageId } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const { blocks, addBlock, updateBlock, deleteBlock } = useBlocks(pageId);
+
+  const [editingBlock, setEditingBlock] = useState();
+
   const { getPage, updatePage } = usePages();
 
   const page = getPage(pageId);
@@ -46,13 +48,22 @@ const Blocks = () => {
           <div key={block.id}>
             <Block
               value={block.data}
+              isEditing={block.id === editingBlock?.id}
+              onEdit={() => setEditingBlock(block)}
               onChange={(data) => {
                 updateBlock(block.id, data);
               }}
             />
-            <Button size="sm" variant="danger" onClick={() => deleteBlock(block.id)}>
-              Delete
-            </Button>
+            { block.id === editingBlock?.id && (
+              <ButtonGroup className="mb-2" size="sm">
+                <Button variant="outline-danger" onClick={() => deleteBlock(block.id)}>
+                  Delete
+                </Button>
+                <Button variant="outline-secondary" onClick={() => setEditingBlock(null)}>
+                  Close
+                </Button>
+              </ButtonGroup>
+            ) }
           </div>
         );
       })}
