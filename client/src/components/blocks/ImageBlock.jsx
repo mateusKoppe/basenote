@@ -8,7 +8,9 @@ const ImageBlock = ({value = defaultValues, onChange = () => {} }) => {
       <Form.Label>Upload an Image</Form.Label>
       <Form.Control
         type="file"
-        onChange={(e) => {onChange({ ...value, file: e.target.files[0] })}}
+        onChange={(e) => {
+          console.log(e);
+          onChange({ ...value, file: e.target.files[0] })}}
       ></Form.Control>
 
     </Form.Group>

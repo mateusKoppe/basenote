@@ -18,6 +18,26 @@ const AddBlock = ({ onSave = () => {} }) => {
     setSelectedType(e.target.value);
   };
 
+  const handleSaveUpload = async () => {
+    const formData = new FormData();
+    formData.append(
+      "file",
+      blockState.file,
+      blockState.file.name,
+    );
+
+    await onSave({
+      type: selectedType,
+      data: {
+        filename: blockState.file.name,
+      },
+      file: formData,
+    }, true);
+    setIsCreating(false);
+    setBlockState();
+    setSelectedType(defaultBlock);
+  };
+
   const handleSave = async () => {
     await onSave({ type: selectedType, data: blockState });
     setIsCreating(false);
@@ -25,7 +45,7 @@ const AddBlock = ({ onSave = () => {} }) => {
     setSelectedType(defaultBlock);
   };
 
-  const normalType = (
+  return isCreating ? (
     <Form>
       <Form.Select value={selectedType} onChange={handleSelectChange}>
         {blockKeys.map((key) => (
@@ -35,12 +55,12 @@ const AddBlock = ({ onSave = () => {} }) => {
         ))}
       </Form.Select>
       <CreatingBlock value={blockState} onChange={setBlockState} isEditing={true} />
-      <Button onClick={handleSave}>Save</Button>
+      <Button
+        onClick={blockTypes[selectedType]?.isUpload
+          ? handleSaveUpload
+          : handleSave}
+      >Save</Button>
     </Form>
-  );
-
-  return isCreating ? (
-    normalType
   ) : (
     <Button onClick={() => setIsCreating(true)}>Add</Button>
   );
