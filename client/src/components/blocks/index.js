@@ -1,6 +1,6 @@
 import TextBlock from "./TextBlock";
 import TitleBlock from "./TitleBlock";
-import ImageBlock from "./ImageBlock";
+import ImageBlock from "./ImageBlock/index";
 
 export const blockTypes = {
   text: { label: "Text", render: TextBlock },

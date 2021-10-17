@@ -5,9 +5,8 @@
 (defn save-file [req]
   (let [tmpfilepath (:path (bean (-> req :params :file :tempfile)))
         filename (-> req :params :file :filename)
-        custom-path (format "files/%s/%s.%s"
+        custom-path (format "resources/files/%s/%s"
                             (-> req :route-params :page-id)
-                            filename 
-                            (get (str/split filename #"\.") 1))]
+                            filename)]
     (io/make-parents custom-path)
     (io/copy (io/file tmpfilepath) (io/file custom-path))))

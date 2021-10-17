@@ -1,16 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 import Api from "../lib/api";
 
 const useBlocks = (pageId) => {
   const [blocks, setBlocks] = useState([]);
-
-  // Todo: When file is sent, save block as well
-  const _uploadFile = async (file) => {
-    const response = await Api.post(`/pages/${pageId}/upload`, file);
-    return response;
-  }
 
   const loadBlocks = async () => {
     const response = await Api.get(`/pages/${pageId}/blocks`);
@@ -22,7 +15,7 @@ const useBlocks = (pageId) => {
     let newBlock;
 
     if (isUpdate) {
-      await _uploadFile(block.file);
+      delete block.file;
     }
     
     const response = await Api.post(`/pages/${pageId}/blocks`, block);
@@ -31,7 +24,11 @@ const useBlocks = (pageId) => {
     setBlocks((blocks) => [...blocks, newBlock]);
   };
 
-  const updateBlock = async (id, data) => {
+  const updateBlock = async (id, data, isUpdate=false) => {
+    if (isUpdate) {
+      delete data.file;
+    }
+
     const index = blocks.findIndex((block) => block.id === id);
     const newBlock = { ...blocks[index], data };
 

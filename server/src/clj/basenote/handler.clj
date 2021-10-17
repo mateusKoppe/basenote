@@ -3,6 +3,7 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.multipart-params :refer [wrap-multipart-params]]
+            [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [clj.basenote.routes.pages :as pages]
             [clj.basenote.routes.blocks :as blocks]
@@ -26,6 +27,7 @@
 
 (def app
   (-> (wrap-defaults app-routes api-defaults)
+      (wrap-resource "files")
       wrap-json-response
       wrap-multipart-params
       (wrap-json-body {:keywords? true :bigdecimals? true})
