@@ -51,7 +51,7 @@ const Blocks = () => {
               isEditing={block.id === editingBlock?.id}
               onEdit={() => setEditingBlock(block)}
               onChange={(data) => {
-                updateBlock(block.id, data);
+                updateBlock(block.id, data, block?.isUpload);
               }}
             />
             { block.id === editingBlock?.id && (

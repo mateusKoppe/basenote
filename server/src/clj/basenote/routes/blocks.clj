@@ -33,6 +33,7 @@
     (validate-body
      (:body req) validation-schema
      (fn [fields]
+       (println fields)
        (let [exists (blocks/block-exists?
                      (-> req :body :page-id)
                      (-> req :body :id))]
@@ -40,8 +41,8 @@
            (-> (response {:msg "id already used"})
                (status 409))
            (response (blocks/create-block
-                     fields
-                     (-> req :route-params :page-id)))))))
+                      fields
+                      (-> req :route-params :page-id)))))))
   (catch Exception _
     (-> (response {:error "Error in the request"})
         (status 500)))))
