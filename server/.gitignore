@@ -14,3 +14,4 @@ pom.xml
 .lsp
 .nrepl-port
 data
+resources/files/

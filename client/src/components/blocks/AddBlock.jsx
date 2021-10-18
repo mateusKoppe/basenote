@@ -34,8 +34,10 @@ const AddBlock = ({ onSave = () => {} }) => {
           </option>
         ))}
       </Form.Select>
-      <CreatingBlock value={blockState} onChange={setBlockState} />
-      <Button onClick={handleSave}>Save</Button>
+      <CreatingBlock value={blockState} onChange={setBlockState} isEditing={true} />
+      <Button
+        onClick={handleSave}
+      >Save</Button>
     </Form>
   ) : (
     <Button onClick={() => setIsCreating(true)}>Add</Button>

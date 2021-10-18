@@ -11,13 +11,24 @@ const useBlocks = (pageId) => {
     setBlocks(Object.values(data));
   };
 
-  const addBlock = async (block) => {
+  const addBlock = async (block, isUpdate=false) => {
+    let newBlock;
+
+    if (isUpdate) {
+      delete block.file;
+    }
+    
     const response = await Api.post(`/pages/${pageId}/blocks`, block);
-    const newBlock = response.data;
+    newBlock = response.data;
+    
     setBlocks((blocks) => [...blocks, newBlock]);
   };
 
-  const updateBlock = async (id, data) => {
+  const updateBlock = async (id, data, isUpdate=false) => {
+    if (isUpdate) {
+      delete data.file;
+    }
+
     const index = blocks.findIndex((block) => block.id === id);
     const newBlock = { ...blocks[index], data };
 
