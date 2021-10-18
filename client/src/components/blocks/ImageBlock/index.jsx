@@ -26,7 +26,7 @@ const ImageBlockDisplay = ({ value, onEdit }) => {
 
   return (
     <img
-      class="img"
+      className="img"
       src={imgUrl}
       alt=""
       onClick={onEdit}

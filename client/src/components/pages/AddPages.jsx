@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Form, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Form, InputGroup, FormControl, ListGroup } from "react-bootstrap";
+import * as Icon from 'react-bootstrap-icons';
 
 
 const AddPages = ({ onSave = () => { } }) => {
@@ -25,10 +26,10 @@ const AddPages = ({ onSave = () => { } }) => {
           aria-label="Title"
         />
       </InputGroup>
-      <Button onClick={handleSave}>Save</Button>
+      <Button onClick={handleSave}><Icon.CheckLg size={15}/> Save</Button>
     </Form>
   ) : (
-    <Button onClick={() => setIsCreating(true)}>Add</Button>
+    <ListGroup.Item action onClick={() => setIsCreating(true)}><Icon.Plus size={25}/>New Page</ListGroup.Item>
   );
 };
 
