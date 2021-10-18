@@ -1,0 +1,31 @@
+.delete-btn {
+    background-color: transparent !important;
+    color:rgb(156, 153, 153)!important;
+    border: none !important;
+}
+
+.logo {
+    background-color: #5c5c5c;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #dfdfdf;
+}
+
+.list-group-item {
+    background-color: #dfdfdf!important;
+    color: #5c5c5c !important;
+}
+
+.list-group-item.active {
+    background-color: #949090!important;
+    border-color: #949090!important;
+    color: #dfdfdf!important;
+
+    .delete-btn {
+        color: #dfdfdf!important;
+    }
+}

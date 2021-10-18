@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { blockTypes } from ".";
+import * as Icon from 'react-bootstrap-icons';
 
 const blockKeys = Object.keys(blockTypes);
 const defaultBlock = blockKeys[0];
@@ -37,7 +38,7 @@ const AddBlock = ({ onSave = () => {} }) => {
       <CreatingBlock value={blockState} onChange={setBlockState} isEditing={true} />
       <Button
         onClick={handleSave}
-      >Save</Button>
+      ><Icon.CheckLg size={15}/>Save</Button>
     </Form>
   ) : (
     <Button onClick={() => setIsCreating(true)}>Add</Button>
