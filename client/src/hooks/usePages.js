@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Api from "../lib/api";
 
-const usePages = (pageId) => {
+const usePages = () => {
   const [pages, setPages] = useState([]);
 
   const loadPages = async () => {
