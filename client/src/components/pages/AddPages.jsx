@@ -11,14 +11,15 @@ const AddPages = ({ onSave = () => { } }) => {
     setPageTitle(event.target.value);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     await onSave({ title: pageTitle });
     setIsCreating(false);
     setPageTitle();
   };
 
   return isCreating ? (
-    <Form>
+    <Form onSubmit={handleSave}>
        <InputGroup className="mb-3">
         <InputGroup.Text>Title</InputGroup.Text>
         <FormControl
@@ -26,7 +27,7 @@ const AddPages = ({ onSave = () => { } }) => {
           aria-label="Title"
         />
       </InputGroup>
-      <Button onClick={handleSave}><Icon.CheckLg size={15}/> Save</Button>
+      <Button type="submit"><Icon.CheckLg size={15}/> Save</Button>
     </Form>
   ) : (
     <ListGroup.Item action onClick={() => setIsCreating(true)}><Icon.Plus size={25}/>New Page</ListGroup.Item>

@@ -19,7 +19,8 @@ const AddBlock = ({ onSave = () => {} }) => {
     setSelectedType(e.target.value);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    e.preventDefault();
     await onSave({ type: selectedType, data: blockState });
     setIsCreating(false);
     setBlockState();
@@ -27,7 +28,7 @@ const AddBlock = ({ onSave = () => {} }) => {
   };
 
   return isCreating ? (
-    <Form>
+    <Form onSubmit={handleSave}>
       <Form.Select value={selectedType} onChange={handleSelectChange}>
         {blockKeys.map((key) => (
           <option key={key} value={key}>
@@ -36,9 +37,7 @@ const AddBlock = ({ onSave = () => {} }) => {
         ))}
       </Form.Select>
       <CreatingBlock value={blockState} onChange={setBlockState} isEditing={true} />
-      <Button
-        onClick={handleSave}
-      ><Icon.CheckLg size={15}/>Save</Button>
+      <Button type="submit"><Icon.CheckLg size={15}/>Save</Button>
     </Form>
   ) : (
     <Button onClick={() => setIsCreating(true)}>Add</Button>
